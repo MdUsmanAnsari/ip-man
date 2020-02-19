@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Lato&display=swap" rel="stylesheet">
+    <title>IP-MAN The Finale</title>
+    <style>
+    
+    :root{
+    --color-primary:#deca7d;
+    --color-secondary:#101e29;
+    }
+
+    *{
+    margin: 0;
+    padding: 0;
+    }
+
+
+    body{
+    box-sizing: border-box;
+    background-color: var(--color-primary);
+    position: relative;
+    overflow: hidden; 
+    }
+
+
+    .loading-con{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color:var(--color-secondary);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-family: 'Cinzel',sans-serif;
+    font-weight: normal;
+    backface-visibility: hidden;
+    text-align: center;
+    }
+
+    .loading-title-text{
+    display: block;
+    letter-spacing: 7px;
+    font-size: 1.6rem;
+    animation:bounceInRight 3s 2s backwards cubic-bezier(0.19, 1, 0.22, 1); 
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(20%, transparent) , to(rgba(250, 250, 250, .1)));
+    }
+
+    .loading-desc-text{
+    display: block;
+    letter-spacing: 10px;
+    font-size: 1rem;
+    animation:zoomInLeft 4s 3s backwards cubic-bezier(0.77, 0, 0.175, 1); 
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(20%, transparent) , to(rgba(250, 250, 250, .1)));
+    }
+
+    .moa-qoute{
+        display: block;
+        letter-spacing: 10px;
+        font-size: 1rem;
+        font-weight: normal;
+        animation:fadeInUp 2s 5s backwards cubic-bezier(0.77, 0, 0.175, 1); 
+    }
+
+    @-webkit-keyframes fadeInUp {
+        from {
+          opacity: 0;
+          -webkit-transform: translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0);
+        }
+      
+        to {
+          opacity: 1;
+          -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+    .loading-blink{
+    font-family: 'Lato',sans-serif;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    opacity: 0;
+    font-weight: normal;
+    animation: blinkText 1s 7s infinite;
+    }
+
+
+    @keyframes blinkText{
+    0%,100%{opacity: 0;}
+    50%{opacity: 1;}
+    }
+
+    @-webkit-keyframes bounceInRight {
+    from,
+    60%,
+    75%,
+    90%,
+    to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    from {
+    opacity: 0;
+    -webkit-transform: translate3d(-200px, 0, 0);
+    transform: translate3d(-200px, 0, 0);
+    }
+
+    60% {
+    opacity: 1;
+    -webkit-transform: translate3d(-25px, 0, 0);
+    transform: translate3d(25px, 0, 0);
+    }
+
+    75% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+    }
+
+    90% {
+    -webkit-transform: translate3d(-5px, 0, 0);
+    transform: translate3d(5px, 0, 0);
+    }
+
+    to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    }
+    }
+
+
+    @-webkit-keyframes zoomInLeft {
+    from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    60% {
+    opacity: 1;
+    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    }
+    }
+
+
+    @keyframes scalingTextLeft{
+    from{
+    opacity: 0;
+    transform: scale(2) translateX(-200px);
+    }
+
+    to{
+    transform: scale(1);
+    opacity: 1;
+    }
+    } 
+
+
+
+    .scroll-down-btn{
+    background-color: var(--color-secondary);
+    position: absolute;
+    z-index: 100;
+    top: 89vh;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    text-align: center;
+    clip-path: polygon(50% 31%, 100% 0, 50% 100%, 51% 100%, 0 0);
+    }
+
+    #scroll-down-btn{
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: .2rem 1rem ;
+    font-size: 2rem;
+    }
+
+
+    .container{
+    margin: auto;
+    }
+
+
+    .header{
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+    clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 85%, 0 100%, 0 0);
+    position: relative;
+    overflow: hidden;
+    }
+
+    .header__video{
+    position: absolute;
+    top: -25%;
+    left: 0;
+    height: 150%;
+    width: 130%;
+    opacity: .2;
+    }
+
+    .header__content{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    }
+
+    .header__img{
+    height: 100%;
+    }
+
+    .image-section{
+    padding: 5rem 0;
+    }
+
+
+    .collage-img{
+    margin: auto;
+    max-width: 36rem;
+    height: 22rem;
+    position: relative;
+    perspective: 1000px;    
+    }
+
+    .photo{
+    position: absolute;
+    width: 6rem;
+    height: 10rem;
+    overflow: hidden;
+    border: 4px solid #fff;
+    transform: translate(-50%,-50%);
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent) , to(rgba(250, 250, 250, .2)));
+
+    }
+
+    .photo > *{
+    height:100%;
+    }
+
+
+
+
+    .photo:nth-of-type(1){
+    left: 1rem;
+    transform:rotateY(30deg);
+    animation: swapingPlace-2 20s  linear infinite;
+    }
+
+
+    .photo:nth-of-type(2){
+    right: 1rem;
+    transform:rotateY(-30deg);
+    animation: swapingPlace-1 20s linear infinite;
+    }
+
+
+    .photo:nth-of-type(3){
+    left: 50%;
+    transform: translateX(-50%);  
+
+    }
+
+    .photo:nth-of-type(4){
+    position: absolute;
+    width: 18rem;
+    height: 7rem;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%,50%);
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+    border: 4px solid #dfbd00;
+    }
+
+    .photo:nth-of-type(5),.photo:nth-of-type(6){
+    width: 8rem;
+    height: 3rem;
+    top: 70%;
+    z-index: -1;
+
+    }
+
+
+
+
+    .photo:nth-of-type(5){
+    left:2%;
+    transform: rotateY(-40deg);
+    }
+
+    .photo:nth-of-type(6){
+    right: 2%;
+    transform: rotateY(40deg);
+    }
+
+    @media only screen and (max-width: 600px) {
+    .photo:nth-of-type(5),.photo:nth-of-type(6){
+    width: 5rem;
+    height: 2rem;
+    top: 96%;
+    z-index: 1;
+    }
+    .photo:nth-of-type(5){
+    left:8%;
+    transform: rotateY(-30deg);
+    }
+
+    .photo:nth-of-type(6){
+    right: 8%;
+    transform: rotateY(30deg);
+    }
+    }
+
+
+    .ipman-heading{
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: var(--color-secondary);
+    padding-top: 2rem;  
+    font-size: 1rem;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(60%, transparent) , to(rgba(250, 250, 250, .2)));
+    }
+
+    .ipman-heading span{
+    display: block;
+
+    }
+
+
+
+    /* 
+    Character 
+    */
+
+
+    .movie-summary{
+
+    padding: 4rem 0;
+    background-color:var(--color-secondary);
+    }
+
+
+    .movie-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 80rem;
+    margin: auto;
+    }
+
+    .movie-item{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+    }
+
+    .movie-item:not(:last-child){
+    margin-bottom: 3rem;
+    }
+
+
+    .primary-heading{
+    text-align: center;
+    color: #fff;
+    font-weight: 200;
+    letter-spacing: 6px;
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    font-family: 'Cinzel', serif;
+    }
+
+    .primary-heading span{
+    display: block;
+    font-size: 1.2rem;
+    }
+
+
+    .movie-frame{
+    padding: 1rem;
+    padding-bottom: 9rem;
+    min-width:250px;
+    max-width: 300px;
+    width: 60%;
+    background-image:linear-gradient(to top,transparent 20%,#dee5e7,#cdd5d8 0);
+    position: relative;
+    }
+
+    .frame-img{
+    height: 12rem;
+    position: relative;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent) , to(rgba(250, 250, 250, .1)));
+    }
+
+
+    .frame-img img{
+    width: 100%;
+    height: 100%;
+    }
+
+    .frame-title{
+    position: absolute;
+    bottom:-36%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: .6rem; 
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+    }
+
+    .frame-text{
+    padding: 2.5rem 0;
+    padding-bottom: 0;
+    font-family: 'Lato',sans-serif;
+    font-size: 1rem;
+    position: relative;
+    z-index: 1;
+    color: var(--color-secondary);
+    }
+
+    .burn-img{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -5px;
+    z-index: 0;
+    }
+
+    /*
+
+    ABOUT SECTION
+
+    */
+
+    .about-section{
+    padding: 2rem;
+    }
+
+    .about-section > *{
+    color: var(--color-secondary);
+    font-weight: bold;
+    }
+
+    .about-para{
+    font-size: 1rem;
+    font-family: 'Lato',sans-serif;    
+    font-weight: normal;
+    }
+
+    .about-para span{
+    display: block;
+    font-weight: bold;
+    margin: 1rem 0;
+    letter-spacing: 2px;
+    }
+
+    /*
+
+    CAST SECTION
+
+    */
+
+    .cast-section{
+    padding: 4rem 0;
+    background-color: var(--color-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .cast-box{
+    display: flex;
+    justify-content: center;
+    }
+
+    .cast-frame{
+    max-width: 300px;
+    padding: 2rem 1rem;
+    }
+
+    .cast-img-box{
+    width: 100%;
+    position: relative;
+    padding-bottom: 2rem;
+
+
+    }
+
+    .cast-img-overlay{
+    background-image: linear-gradient(to bottom,transparent 50%,rgba(16, 30, 41, 0.904) 75%,var(--color-secondary));
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    }
+
+    .cast-img{
+    border-radius: 10px;
+    width: 100%;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent) , to(rgba(250, 250, 250, .1)));
+    }
+
+    .fade-in-and-out{
+    transition: all .6s;
+    }
+
+    .cast-datails{
+    margin-top: -6rem;
+    padding-left: 1rem;
+    position: relative;
+    width: 300px;
+    }
+
+    .cast-datails-text{
+    color: #fff;
+    font-family: 'Lato',sans-serif;
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.6rem;
+    letter-spacing: 2px;
+    max-width: 300px;
+
+    }
+    .cast-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+    perspective: 1000px;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(60%, transparent) , to(rgba(250, 250, 250, .2)));
+    }
+
+    .cast-list-img{
+    margin-top: 1rem;
+    width: 4rem;
+    height: 5rem;
+    overflow: hidden;
+    transform: rotateY(30deg);
+    box-shadow: 0 0rem 5rem rgba(0, 0, 0, 0.4);
+    transition: all .4s ease-in-out;
+    cursor: pointer;
+    border-radius: 5px;
+    }
+
+    .cast-list-img:not(:last-child){
+    margin-right: 4px;
+    }
+
+    .cast-list-img:hover{
+    transform: rotateY(0deg);
+    }
+
+    .profile-img{
+    width: 100%;
+    height: 100%;
+
+    }
+
+
+
+    /*  FOOTER */
+
+    .footer{
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+    }
+
+    .footer-text{
+    font-family: 'Lato',sans-serif;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: var(--color-secondary);
+    width: 300px;
+    }
+</style>
+
+</head>
+<body>
+
+    <div class="loading-con">
+           <h2>
+                <span class="loading-title-text">
+                    Ip Man - 4 
+                </span>
+                <span class="loading-desc-text">The Finale</span>
+                <span class="moa-qoute"><br>Fight For Your Rights If It's Right.</span>
+                <span class="loading-blink"><br>Loading.</span>
+           </h2>  
+                         
+           
+    </div>
+
+    <div class="container">
+        <header class="header">
+
+            <div class="header__video">
+                <video poster="https://www.dropbox.com/s/1ck29lpr5u8ybat/img-1.jpg?dl=1" class="header__content" autoplay muted loop>
+                    <source src="https://www.dropbox.com/s/gtv2oufbpzmkth4/video-2.mp4?dl=1" type="video/mp4">
+                </video>
+            </div>
+            
+            <div class="header__img">
+                <img src="https://www.dropbox.com/s/1ck29lpr5u8ybat/img-1.jpg?dl=1" width="100%" height="100%">
+            </div>
+
+        </header>
+
+        <div class="scroll-down-btn">
+                <a id="scroll-down-btn" href="#image-section" >	&nbsp;</a>
+        </div>
+
+        <section class="image-section" id="image-section">
+
+             <div class="collage-img">
+
+                    <div class="photo">
+                        <img src="https://www.dropbox.com/s/1ck29lpr5u8ybat/img-1.jpg?dl=1" alt="">
+                    </div>
+                    <div class="photo"> 
+                        <img src="https://www.dropbox.com/s/v1pnq17w7h4euoe/img-2.jpg?dl=1" alt="">
+                    </div>
+                    <div class="photo">
+                        <img src="https://www.dropbox.com/s/llxyx7u59tkz350/img-3.jpg?dl=1" alt=""> 
+                    </div>
+                    <div class="photo">
+                        <video poster="https://www.dropbox.com/s/53n6kzlcojgljyb/img-8.jpg?dl=1" class="header__content" autoplay muted loop>
+                            <source src="https://www.dropbox.com/s/dnf9rrbubau63rx/video-3.mp4?dl=1" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="photo">
+                        <video poster="https://www.dropbox.com/s/53n6kzlcojgljyb/img-8.jpg?dl=1" class="header__content" autoplay muted loop>
+                            <source src="https://www.dropbox.com/s/mwujt0xqfgnseyh/video-1.mp4?dl=1" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="photo">
+                        <video poster="https://www.dropbox.com/s/53n6kzlcojgljyb/img-8.jpg?dl=1"class="header__content" autoplay muted loop>
+                            <source src="https://www.dropbox.com/s/gtv2oufbpzmkth4/video-2.mp4?dl=1" type="video/mp4">
+                        </video>
+                    </div>
+
+            </div>
+
+            <h1 class="ipman-heading ipman-heading--reflect">
+                <span>Ip Man</span> 
+                <span>Keep Discipline  Front Of Everyone. </span>
+                <span> Use Your Martial Skill For Good Of The Humanity.</span>
+                <span> Man Of Action</span>
+            </h1>
+
+        </section>
+
+      
+        <section class="movie-summary">
+          
+            <h1 class="primary-heading">
+                Ip Man 
+                <span>Series</span>
+            </h1>
+    
+    
+            <div class="movie-flex">
+
+                <div class="movie-item">
+                    <div class="movie-frame">
+                        <div class="frame-img">
+                            <img src="https://www.dropbox.com/s/53n6kzlcojgljyb/img-8.jpg?dl=1" alt="">
+                            <span class="frame-title">
+                                Ip Man - 1
+                            </span>
+                        </div>
+                        <div class="frame-text">
+                            Centering on Ip Man's migration to Hong Kong in 1949 as he attempts to propagate his discipline of Wing Chun martial arts.
+                            <br><br>
+                        </div>
+                        <img class="burn-img" src="https://www.dropbox.com/s/ybl9covfpotiym2/burn-1.png?dl=1" alt="">
+                    </div>          
+                </div>
+
+                <div class="movie-item">
+                    <div class="movie-frame">
+                        <div class="frame-img">
+                            <img src="https://www.dropbox.com/s/6f1m4yuanf41rhm/img-6.jpg?dl=1" alt="">
+                            <span class="frame-title">
+                                Ip Man - 2
+                            </span>
+                        </div>
+                        <div class="frame-text">
+                            Wing Chun grandmaster Ip has an amazing wife, plenty of money, the most beautiful house in town, and a blossoming martial arts academy. But when the Japanese occupy his hometown of Foshan during the Sino-Japan war (1937), Ip, like the rest of the locals, is forced into hard labor and brutal sparring matches for the enemy's amusement.
+                        </div>
+                        <img class="burn-img" src="https://www.dropbox.com/s/ybl9covfpotiym2/burn-1.png?dl=1" alt="">
+                    </div>          
+                </div>
+    
+                <div class="movie-item">
+                    <div class="movie-frame">
+                        <div class="frame-img">
+                            <img src="https://www.dropbox.com/s/ugd2fh04049lshj/img-7.jpg?dl=1" alt="">
+                            <span class="frame-title">
+                                Ip Man - 3
+                            </span>
+                        </div>
+                        <div class="frame-text">
+                            When a band of brutal gangsters led by a crooked property developer make a play to take over a local school, Master Ip is forced to take a stand.
+                        </div>
+                        <img class="burn-img" src="https://www.dropbox.com/s/ybl9covfpotiym2/burn-1.png?dl=1" alt="">
+                    </div>          
+                </div>
+
+                <div class="movie-item">
+                    <div class="movie-frame">
+                        <div class="frame-img">
+                            <img src="https://www.dropbox.com/s/kieij53xyzxes8o/img-5.jpg?dl=1" alt="">
+                            <span class="frame-title">
+                                Ip Man - 4
+                            </span>
+                        </div>
+                        <div class="frame-text">
+                            Ip Man 4: The Finale is a Hong Kong biographical martial arts film directed by Wilson Yip, written by Hiroshi Fukazawa and produced by Raymond Wong. It is the fourth and final film in the Ip Man film series based on the life of the Wing Chun grandmaster of the same name and features Donnie Yen reprising the role. The film began production in April 2018 and ended in July the same year. It is scheduled to be released on 20 December 2019.
+                        </div>
+                        <img class="burn-img" src="https://www.dropbox.com/s/ybl9covfpotiym2/burn-1.png?dl=1" alt="">
+                    </div>          
+                </div>
+            </div>
+           
+        </section>
+
+        <section class="about-section">
+            <h1 class="ipman-heading primary-heading">
+                About
+            </h1>
+            <p class="about-para">
+                
+                <span>Who Was Yip Man?</span>
+                Yip Man, also known as Ip Man, was born on October 1, 1893, in Foshan, China. He studied Wing Chun and went on to become one of the most respected martial arts masters of his time. Among his most notable students was Bruce Lee. Yip Man died on December 2, 1972, in Hong Kong. In 2013, two films about his life were released, The Grandmaster and Ip Man: The Final Fight.
+
+                <span>Early Life</span>
+                Yip Man, also known as Ip Man, was born Ip Kai Man (or Yip Kai Man) on October 1, 1893, in Foshan, China. He was the third of four children and was raised by his wealthy parents, Ip Oi Dor and Ng Shui.
+
+                Political upheaval served as the backdrop for Man's younger years, but he received a traditional education until, at age 12, he was able to begin studying Wing Chun--a system of martial arts developed in southern China more than 300 years ago--under the tutelage of Chan Wah Shun, who charged him an exorbitant amount of money for the service, initially believing he would discourage the boy. But Man would learn much from his teacher in the three short years before Wah Shun's death.
+
+                <span>Career</span>
+                At the age of 15, Man moved to Hong Kong, where he later attended St. Stephen's College. While in Hong Kong he also continued his martial arts training. Man eventually returned to Foshan at the age of 24 and was employed as a police officer. By this point, his Wing Chun skills were such that he was able to begin giving private lessons.
+
+                In 1949, when the Chinese Communist Party came to power, Man fled to Hong Kong, where he opened a Wing Chun school, charging for his services and becoming the first martial arts master to train students publicly. One of Man's most notable students was Bruce Lee, who studied under the master in 1953. At the age of 13, Lee was an excellent and intense student and became proficient in the Wing Chun art. Lee would return to visit Yip Man in later years, the two having become friends.
+
+                <span>Personal Life, Later Years and Legacy</span>
+                Yip Man was married to Cheung Wing Sing, and the couple had two sons, Ip Chun and Ip Ching, both of whom became martial arts specialists. There is little information about his daughter or daughters, whose names are believed to be Yip Ar Sum and Yip Ar Woon.
+            </p>
+        </section>
+
+
+        <section class="cast-section">
+
+            <h1 class="ipman-heading primary-heading">
+                Ip Man 
+                <span>Cast</span>
+            </h1>
+            <div class="fade-in-and-out">
+                <div class="cast-box">
+                    <div class="cast-frame">
+                        <div class="cast-img-box">
+                            <img src="https://www.dropbox.com/s/v1mb82vhf6bgoq6/Profile-1.jpg?dl=1" alt="" class="cast-img">
+                            <div class="cast-img-overlay"></div>
+                        </div>
+                    </div>
+               </div>
+               <div class="cast-datails">
+                   <h2 class="cast-datails-text">Donie Yen</h2>
+                   <h2 class="cast-datails-text">Born : </h2>
+                   <h2 class="cast-datails-text">Role : Master Ip Man </h2>
+               </div>   
+            </div>
+          
+            <div class="cast-list">
+                <div class="cast-list-img" onclick="changeCastDetails(0)">
+                    <img src="https://www.dropbox.com/s/v1mb82vhf6bgoq6/Profile-1.jpg?dl=1" alt="" class="profile-img">
+                </div>
+                <div class="cast-list-img" onclick="changeCastDetails(1)">
+                    <img src="https://www.dropbox.com/s/h7wjxx3biit0kpz/Profile-2.jpg?dl=1" alt="" class="profile-img">
+                </div>
+                <div class="cast-list-img" onclick="changeCastDetails(2)">
+                    <img src="https://www.dropbox.com/s/uahw2tw8qubnz9q/Profile-3.jpg?dl=1" alt="" class="profile-img">
+                </div>
+                <div class="cast-list-img" onclick="changeCastDetails(3)">
+                    <img src="https://www.dropbox.com/s/qcsw4qfab1doqhr/Profile-4.jpg?dl=1" alt="" class="profile-img">
+                </div>
+            </div>  
+
+        </section>
+
+        <footer class="footer">
+                <p class="footer-text"> Copyright &copy; by <strong>Man Of Action </strong>,You are 100% allowed to use this webpage Design, but NOT to claim it as your own design. A credit to the original author, <strong>Man Of Action </strong>, is of course highly appreciated! </p>
+        </footer>
+
+
+      
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
